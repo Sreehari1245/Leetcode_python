@@ -1,0 +1,19 @@
+"""Leetcode 1. Given an array of integers nums and an integer target, 
+return indices of the two numbers such that they add up to target.
+You may assume that each input would have exactly one solution, 
+and you may not use the same element twice. """
+
+class Solution(object):
+    def twoSum(self, nums, target):
+        num_map = {} # You are storing the value and index as an hash map
+        for i, num in enumerate(nums): # Enumerate allows us get the index and value at the same time
+            complement = target - num
+            if complement in num_map:
+                return [num_map[complement],i]
+            num_map[num] = i
+
+solution = Solution()
+l = [1,2,3,4]
+print(solution.twoSum(l, 7))
+  
+            
