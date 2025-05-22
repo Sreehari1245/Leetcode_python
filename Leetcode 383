@@ -1,0 +1,31 @@
+"""Leetcode 383: Given two strings ransomNote and magazine, return true if ransomNote 
+can be constructed by using the letters from magazine and false otherwise.
+
+Each letter in magazine can only be used once in ransomNote."""
+
+class Solution(object):
+    def canConstruct(self, ransomNote, magazine):
+        """
+        :type ransomNote: str
+        :type magazine: str
+        :rtype: bool
+        """
+        
+        # We are creating a lookup table to find the number of times each character appears in the string
+        def lookup_table(string):
+            output = {}
+            for ch in string:
+                output[ch] = output.get(ch,0) + 1
+            return output
+        lookup_ransom = lookup_table(ransomNote)
+        lookup_magazine = lookup_table(magazine)
+
+        for key in lookup_ransom:
+            if lookup_ransom[key] > lookup_magazine.get(key, 0):
+                return False
+        return True    
+    
+solution = Solution()
+ransomNote = "ab"
+magazine = "aba"
+print(solution.canConstruct(ransomNote, magazine))
