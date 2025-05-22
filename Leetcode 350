@@ -1,0 +1,32 @@
+"""Leetcode 350: Given two integer arrays nums1 and nums2, return an array of their 
+intersection. Each element in the result must appear as many times as it shows in both 
+arrays and you may return the result in any order."""
+
+class Solution(object):
+    def intersect(self,nums1, nums2):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :rtype: List[int]
+        """
+        def counter(array):
+            counter_list = {}
+            for element in array:
+                counter_list[element] = counter_list.get(element,0) + 1
+            return counter_list
+
+        array1 = counter(nums1)
+        array2 = counter(nums2) 
+        output_list = []
+
+        for key in array1:
+            value = min(array1[key], array2.get(key,0))
+            output_list.extend([key] * value)
+        return output_list    
+
+  
+
+solution = Solution()
+n1 = [1,2,2,1]
+n2 = [2,2]
+print(solution.intersect(n1, n2))      
