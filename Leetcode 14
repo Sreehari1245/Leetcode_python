@@ -1,0 +1,20 @@
+"""Leetcode 14: Write a function to find the longest common prefix string amongst an array 
+of strings. If there is no common prefix, return an empty string"""
+
+class Solution(object):
+    def longestCommonPrefix(self, strs):
+        if not strs:
+            return ""
+        prefix = strs[0]
+        for word in strs[1:]:
+            i = 0
+            while i < len(prefix) and i < len(word) and prefix[i] == word[i]:
+                i += 1
+            prefix = prefix[:i]
+            if not prefix:
+                return ""
+        return prefix
+    
+solution = Solution()
+strs = ["flower","flow","flight"]
+print(solution.longestCommonPrefix(strs))
