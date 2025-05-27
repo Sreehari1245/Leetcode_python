@@ -1,0 +1,22 @@
+"""Leetcode 242: Given two strings s and t, return true if t is an anagram of s, and false 
+otherwise."""
+
+class Solution(object):
+    def isAnagram(self, s, t):
+        """
+        :type s: str
+        :type t: str
+        :rtype: bool
+        """
+        def counter_fn(s):
+            output = {}
+            for ch in s:
+                output[ch] = output.get(ch,0) + 1
+            return output
+        return counter_fn(s) == counter_fn(t)  
+    
+solution = Solution()
+s = "anagram"
+t = "nagaram"
+
+print(solution.isAnagram(s, t))
