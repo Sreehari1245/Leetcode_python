@@ -1,0 +1,28 @@
+"""Leetcode 169: Given an array nums of size n, return the majority element.
+
+The majority element is the element that appears more than ⌊n / 2⌋ times. 
+You may assume that the majority element always exists in the array."""
+
+
+#Here you could have also used a hash-map. But the time and space complexity would be O(n)
+#By using the Boyer-Moore Voting Algorithm, space complexity is O(1)
+
+class Solution(object):
+    def majorityElement(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        count = 0
+        candidate = None
+
+        for num in nums:
+            if count == 0:
+                candidate = num
+            if num == candidate:
+                count += 1
+            else:
+                count -= 1
+
+        return candidate
+
