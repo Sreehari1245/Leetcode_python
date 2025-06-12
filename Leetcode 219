@@ -1,0 +1,19 @@
+"""Leetcode 219: Given an integer array nums and an integer k, return true if there are two distinct indices i and j 
+in the array such that nums[i] == nums[j] and abs(i - j) <= k."""
+
+
+
+class Solution(object):
+    def containsNearbyDuplicate(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: bool
+        """
+        hashmap = {}
+        for index in range(len(nums)):
+            if nums[index] in hashmap:
+                if index - hashmap[nums[index]] <= k:
+                    return True
+            hashmap[nums[index]] = index
+        return False
