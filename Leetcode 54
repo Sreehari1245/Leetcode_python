@@ -1,0 +1,44 @@
+"""Leetcode 54: Given an m x n matrix, return all elements of the matrix in spiral order."""
+
+class Solution(object):
+    def spiralOrder(self, matrix):
+        """
+        :type matrix: List[List[int]]
+        :rtype: List[int]
+        """
+
+        if not matrix:
+            return []
+
+        start_row = 0
+        end_row = len(matrix)-1
+        start_col = 0
+        end_col = len(matrix[0])-1
+        output = []
+
+        while (start_row <= end_row) and (start_col <= end_col):
+            for i in range(start_col,end_col+1):
+                output.append(matrix[start_row][i])
+            
+            start_row += 1
+        
+            for i in range(start_row,end_row+1):
+                output.append(matrix[i][end_col])
+            end_col -= 1
+        
+            if end_row >= start_row:
+                for i in range(end_col,start_col-1,-1):
+                    output.append(matrix[end_row][i])
+                end_row -= 1
+            
+            if end_col >= start_col:
+                for i in range(end_row,start_row-1,-1):
+                    output.append(matrix[i][start_col])
+                start_col += 1
+
+        return output 
+
+
+
+
+        
