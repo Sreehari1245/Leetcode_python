@@ -1,0 +1,48 @@
+"""Leetcode 36:Determine if a 9 x 9 Sudoku board is valid. Only the filled cells need to be validated according to the following rules:
+
+Each row must contain the digits 1-9 without repetition.
+Each column must contain the digits 1-9 without repetition.
+Each of the nine 3 x 3 sub-boxes of the grid must contain the digits 1-9 without repetition.
+Note:
+
+A Sudoku board (partially filled) could be valid but is not necessarily solvable.
+Only the filled cells need to be validated according to the mentioned rules.
+"""
+
+
+class Solution(object):
+    def isValidSudoku(self, board):
+        """
+        :type board: List[List[str]]
+        :rtype: bool
+        """
+        def check(l):
+            found = set()
+            for element in l:
+                if element != '.':
+                    if element in found:
+                        return False
+                    found.add(element)
+            return True
+
+        # Check rows
+        for i in range(9):
+            if not check(board[i]):
+                return False
+
+        # Check columns
+        for i in range(9):
+            test_list = [board[j][i] for j in range(9)]
+            if not check(test_list):
+                return False
+
+        # Check 3x3 subgrids
+        for i in range(3):
+            for j in range(3):
+                test_list = [board[k_1][k_2]
+                             for k_1 in range(3 * i, 3 * i + 3)
+                             for k_2 in range(3 * j, 3 * j + 3)]
+                if not check(test_list):
+                    return False
+
+        return True
